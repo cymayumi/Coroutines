@@ -68,30 +68,35 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private fun initActions() {
         btn.setOnClickListener {
             var moedaAtual = spinner_1.selectedItem as String
-            var moedaConverter = spinner_2.selectedItem as String
-            queryMoeda(moedaAtual)
+            var moedaConversao = spinner_2.selectedItem as String
+            queryMoeda(moedaAtual, moedaConversao)
 
         }
     }
 
-    private fun queryMoeda(moedaAtual: String) {
-        openValores(moedaAtual)
+    private fun queryMoeda(moedaAtual: String, moedaConversao: String) {
+        openValores(moedaAtual, moedaConversao)
     }
 
-    private fun openValores(item : String) {
+    private fun openValores(moedaAtual : String, moedaConversao: String) {
 
         launch {
             val response = withContext(Dispatchers.IO) {
                 val destinationService = ServiceBuilder.buildService(WebAPI::class.java)
-                return@withContext destinationService.getMoedas(item)
-
+                return@withContext destinationService.getMoedas(moedaAtual)
             }
             if (response.isSuccessful) {
                 var moedas = response.body()!!
-                tv_teste.text = moedas.rates.toString()
+                var valorConversao = moedas.rates.get(moedaConversao).toString()
+                tv_teste.text = valorConversao
+                buscarConversao(moedaAtual)
             } else {
                 Toast.makeText(context, "Ocorreu um erro!", Toast.LENGTH_LONG).show()
             }
         }
+    }
+
+    private fun buscarConversao(item : String) {
+
     }
 }
