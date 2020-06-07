@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Toast
 import com.mayumi.conversormoedas.R
 import com.mayumi.conversormoedas.service.ServiceBuilder
@@ -18,9 +19,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext =
         Dispatchers.Main + SupervisorJob()
 
-    private var lista_moedas = arrayListOf<String>("CAD", "HKD", "ISK", "PHP", "DKK", "HUF", "CZK",
+    private var lista_moedas = arrayListOf<String>(
+        "CAD", "HKD", "ISK", "PHP", "DKK", "HUF", "CZK",
         "GBP", "RON", "SEK", "IDR", "INR", "BRL", "RUB", "HRK", "JPY", "THB", "CHF", "EUR", "MYR",
-        "BGN", "TRY", "CNY", "NOK", "NZD", "ZAR", "USD", "MXN", "SGD", "AUD", "ILS", "KRW", "PLN")
+        "BGN", "TRY", "CNY", "NOK", "NZD", "ZAR", "USD", "MXN", "SGD", "AUD", "ILS", "KRW", "PLN"
+    )
     private lateinit var adapterMoedas: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +81,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         openValores(moedaAtual, moedaConversao)
     }
 
-    private fun openValores(moedaAtual : String, moedaConversao: String) {
+    private fun openValores(moedaAtual: String, moedaConversao: String) {
 
         launch {
             val response = withContext(Dispatchers.IO) {
@@ -87,16 +90,17 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             }
             if (response.isSuccessful) {
                 var moedas = response.body()!!
-                var valorConversao = moedas.rates.get(moedaConversao).toString()
-                tv_teste.text = valorConversao
-                buscarConversao(moedaAtual)
+                var valorConversao = moedas.rates.get(moedaConversao)?.toFloat()
+
+                calcular(valorConversao)
             } else {
                 Toast.makeText(context, "Ocorreu um erro!", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun buscarConversao(item : String) {
-
+    private fun calcular(valorConversao: Float?) {
+        var valor = et_valor.text.toString()
+        tv_teste.text = (valorConversao!! * valor.toFloat()).toString()
     }
 }
