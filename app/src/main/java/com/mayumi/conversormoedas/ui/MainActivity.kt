@@ -11,6 +11,7 @@ import com.mayumi.conversormoedas.service.ServiceBuilder
 import com.mayumi.conversormoedas.service.WebAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import okhttp3.internal.format
 import kotlin.coroutines.CoroutineContext
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
@@ -72,6 +73,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         btn.setOnClickListener {
             var moedaAtual = spinner_1.selectedItem as String
             var moedaConversao = spinner_2.selectedItem as String
+
             queryMoeda(moedaAtual, moedaConversao)
 
         }
@@ -92,15 +94,21 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                 var moedas = response.body()!!
                 var valorConversao = moedas.rates.get(moedaConversao)?.toFloat()
 
-                calcular(valorConversao)
+                calcular(valorConversao, moedaAtual, moedaConversao)
             } else {
                 Toast.makeText(context, "Ocorreu um erro!", Toast.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun calcular(valorConversao: Float?) {
+    private fun calcular(valorConversao: Float?, moedaAtual: String, moedaConversao: String) {
         var valor = et_valor.text.toString()
-        tv_teste.text = (valorConversao!! * valor.toFloat()).toString()
+        var resultado = valorConversao!! * valor.toFloat()
+
+        tv_moeda_atual.text = moedaAtual
+        tv_moeda_converter.text = moedaConversao
+        tv_val_cvt.text = valorConversao.toString()
+        tv_sigla_cvt.text = moedaConversao
+        tv_teste.text = format("%.2f", resultado)
     }
 }
