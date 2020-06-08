@@ -7,17 +7,20 @@
     android:background="#EAEAEA"
     android:foregroundTintMode="add">
 
+
     <TextView
         android:id="@+id/button7"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#3F51B5"
-        android:padding="20dp"
+        android:padding="15dp"
         android:text="Suas conversões"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,26 +29,24 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#3F51B5"
-        android:capitalize="none"
-        android:inputType="number"
-        android:padding="20dp"
+        android:padding="15dp"
         android:text="Conversor"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="16dp"
         android:background="#03a9f4"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="@+id/button6"
@@ -62,67 +63,144 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.50364965" />
 
-    <EditText
-        android:id="@+id/et_valor"
-        android:layout_width="176dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="72dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="365dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
         android:background="#FFFFFF"
-        android:gravity="center"
-        android:text="0.00"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/spinner_1"
-        app:layout_constraintTop_toBottomOf="@+id/button7" />
-
-    <Spinner
-        android:id="@+id/spinner_1"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="72dp"
-        android:backgroundTint="#020202"
-        app:layout_constraintEnd_toStartOf="@+id/et_valor"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button6" />
+        app:layout_constraintTop_toBottomOf="@+id/button7">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="70dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="216dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_swap_vert_24" />
+        <EditText
+            android:id="@+id/et_valor"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:hint="0.00"
+            android:inputType="numberDecimal"
+            android:textAlignment="center"
+            android:textColor="@android:color/primary_text_light_nodisable"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/spinner_1"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner_2"
-        android:layout_width="150dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="44dp"
-        android:backgroundTint="#020202"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        <Spinner
+            android:id="@+id/spinner_1"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:backgroundTint="#020202"
+            app:layout_constraintEnd_toStartOf="@+id/et_valor"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="86dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_valor"
+            app:srcCompat="@drawable/ic_baseline_swap_vert_24" />
+
+        <Spinner
+            android:id="@+id/spinner_2"
+            android:layout_width="150dp"
+            android:layout_height="46dp"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="#020202"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toStartOf="@+id/imageView2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/btn"
-        android:layout_width="303dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="44dp"
+        android:layout_width="248dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/round_button"
         android:padding="10dp"
         android:text="converter"
         android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="@+id/spinner_2"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="@+id/spinner_2"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_2" />
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="#FFFFFF"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn">
+
+        <TextView
+            android:id="@+id/tv_sigla_cvt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:paddingRight="15dp"
+            android:text="             "
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_teste"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_teste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:paddingLeft="15dp"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_cvt"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="           " />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Cotação"
+            android:textAlignment="center"
+            android:textColor="#3F51B5"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -185,37 +263,5 @@
             android:textSize="20sp" />
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/tv_sigla_cvt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:paddingRight="15dp"
-        android:text="             "
-        android:textSize="35sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/tv_teste"
-        app:layout_constraintTop_toBottomOf="@+id/btn" />
-
-    <TextView
-        android:id="@+id/tv_teste"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:background="#FFFFFF"
-        android:padding="10dp"
-        android:paddingLeft="15dp"
-        android:textAlignment="center"
-        android:textSize="35sp"
-        app:layout_constraintEnd_toStartOf="@+id/tv_sigla_cvt"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn"
-        tools:text="           " />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
