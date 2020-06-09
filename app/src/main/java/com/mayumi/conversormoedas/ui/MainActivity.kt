@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Toast
 import com.mayumi.conversormoedas.R
 import com.mayumi.conversormoedas.service.ServiceBuilder
@@ -50,22 +49,22 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     private fun setFirstSpinner() {
         adapterMoedas = ArrayAdapter<String>(
             context,
-            android.R.layout.simple_spinner_item,
+            R.layout.custom_spinner,
             lista_moedas
         )
 
-        adapterMoedas.setDropDownViewResource(android.R.layout.simple_list_item_1)
+        adapterMoedas.setDropDownViewResource(R.layout.custom_dropdown)
         spinner_1.adapter = adapterMoedas
     }
 
     private fun setSecondSpinner() {
         adapterMoedas = ArrayAdapter<String>(
             context,
-            android.R.layout.simple_spinner_item,
+            R.layout.custom_spinner,
             lista_moedas
         )
 
-        adapterMoedas.setDropDownViewResource(android.R.layout.simple_list_item_1)
+        adapterMoedas.setDropDownViewResource(R.layout.custom_dropdown)
         spinner_2.adapter = adapterMoedas
     }
 
@@ -106,6 +105,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         var resultado = valorConversao!! * valor.toFloat()
 
         tv_moeda_atual.text = moedaAtual
+        tv_moeda_at.text = moedaAtual
+        tv_valor_input.text = valor.toString()
         tv_moeda_converter.text = moedaConversao
         tv_val_cvt.text = valorConversao.toString()
         tv_sigla_cvt.text = moedaConversao
