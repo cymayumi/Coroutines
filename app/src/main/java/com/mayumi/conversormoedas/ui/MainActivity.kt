@@ -74,16 +74,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             var moedaConversao = spinner_2.selectedItem as String
 
             queryMoeda(moedaAtual, moedaConversao)
-
+            queryConversao(moedaConversao, moedaAtual)
         }
     }
 
     private fun queryMoeda(moedaAtual: String, moedaConversao: String) {
-        openValores(moedaAtual, moedaConversao)
-    }
-
-    private fun openValores(moedaAtual: String, moedaConversao: String) {
-
         launch {
             val response = withContext(Dispatchers.IO) {
                 val destinationService = ServiceBuilder.buildService(WebAPI::class.java)
@@ -100,16 +95,41 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
     }
 
+    private fun queryConversao(moedaConversao: String, moedaAtual: String) {
+        launch {
+            val response = withContext(Dispatchers.IO) {
+                val destinationService = ServiceBuilder.buildService(WebAPI::class.java)
+                return@withContext destinationService.getMoedas(moedaConversao)
+            }
+            if (response.isSuccessful) {
+                var moedas = response.body()!!
+                var valorConversao = moedas.rates.get(moedaAtual)?.toFloat()
+                var date = moedas.date
+
+                tv_valor_2.text = format("%.4f", valorConversao!!)
+                tv_date.text = "Data: "+ date
+            } else {
+                Toast.makeText(context, "Ocorreu um erro!", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+
     private fun calcular(valorConversao: Float?, moedaAtual: String, moedaConversao: String) {
         var valor = et_valor.text.toString()
         var resultado = valorConversao!! * valor.toFloat()
 
         tv_moeda_atual.text = moedaAtual
+        tv_moedaDesejo.text = moedaAtual
         tv_moeda_at.text = moedaAtual
-        tv_valor_input.text = valor.toString()
+        tv_meodaAtual.text = moedaConversao
         tv_moeda_converter.text = moedaConversao
-        tv_val_cvt.text = valorConversao.toString()
         tv_sigla_cvt.text = moedaConversao
+
+        tv_valor_input.text = valor.toString()
+
+        tv_val_cvt.text = format("%.4f", valorConversao)
+
         tv_teste.text = format("%.2f", resultado)
     }
 }

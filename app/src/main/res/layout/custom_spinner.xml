@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/abc_spinner_mtrl_am_alpha"
     android:backgroundTint="#009688"
+    android:textStyle="bold"
     android:ellipsize="marquee"
     android:singleLine="true"
     android:textAlignment="textStart"

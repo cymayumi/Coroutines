@@ -1,5 +1,6 @@
 package com.mayumi.conversormoedas.model
 
 class Moedas(
-    var rates: HashMap<String, Float>
+    var rates: HashMap<String, Float>,
+    var date: String
 )

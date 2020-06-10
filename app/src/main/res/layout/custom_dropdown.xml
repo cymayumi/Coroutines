@@ -8,6 +8,6 @@
     android:layout_height="wrap_content"
     android:ellipsize="marquee"
     android:textAlignment="center"
-  android:textColor="@color/colorPrimaryDark"
+  android:textColor="#009688"
     android:padding="10dp"
     android:background="#ffffff"/>
