@@ -66,7 +66,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="359dp"
+        android:layout_width="0dp"
         android:layout_height="213dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
@@ -138,7 +138,7 @@
         android:layout_width="248dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/round_button"
         android:padding="10dp"
@@ -150,9 +150,11 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="363dp"
-        android:layout_height="305dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:background="#FFFFFF"
         android:elevation="10dp"
@@ -163,7 +165,7 @@
         app:layout_constraintTop_toBottomOf="@+id/btn">
 
         <TextView
-            android:id="@+id/tv_teste"
+            android:id="@+id/tv_valor_resultado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -172,14 +174,14 @@
             android:paddingLeft="15dp"
             android:textAlignment="center"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_cvt"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_moeda_at"
+            app:layout_constraintStart_toEndOf="@+id/tv_sigla_1"
             app:layout_constraintTop_toBottomOf="@+id/textView5"
             tools:text="           " />
 
         <TextView
-            android:id="@+id/tv_sigla_cvt"
+            android:id="@+id/tv_sigla_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -190,7 +192,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_teste"
+            app:layout_constraintStart_toEndOf="@+id/tv_valor_resultado"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <TextView
@@ -210,35 +212,30 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="Seu valor atual"
-            app:layout_constraintEnd_toStartOf="@+id/textView5"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_sigla_1"
+            app:layout_constraintStart_toStartOf="@+id/tv_valor_input"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="32dp"
+            android:layout_marginTop="8dp"
             android:text="Valor convertido"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintEnd_toEndOf="@+id/tv_sigla_2"
+            app:layout_constraintStart_toStartOf="@+id/tv_valor_resultado"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
-            android:id="@+id/tv_moeda_at"
+            android:id="@+id/tv_sigla_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10sp"
             android:text="             "
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_teste"
+            app:layout_constraintEnd_toStartOf="@+id/tv_valor_resultado"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tv_valor_input"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -251,7 +248,7 @@
             android:padding="10sp"
             android:text="           "
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_moeda_at"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_1"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -267,11 +264,11 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_moeda_at"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sigla_1"
             app:srcCompat="@drawable/ic_baseline_monetization_on_24" />
 
         <TextView
-            android:id="@+id/tv_moeda_atual"
+            android:id="@+id/tv_sigla_1_blc1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -281,7 +278,7 @@
             app:layout_constraintEnd_toStartOf="@+id/textView11"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView10"
-            app:layout_constraintTop_toBottomOf="@+id/tv_moeda_at" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_sigla_1" />
 
         <TextView
             android:id="@+id/textView11"
@@ -292,26 +289,26 @@
             android:text="="
             android:textAlignment="center"
             android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_val_cvt"
+            app:layout_constraintEnd_toStartOf="@+id/tv_vlr_1"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_moeda_atual"
-            app:layout_constraintTop_toBottomOf="@+id/tv_moeda_at" />
+            app:layout_constraintStart_toEndOf="@+id/tv_sigla_1_blc1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sigla_1" />
 
         <TextView
-            android:id="@+id/tv_val_cvt"
+            android:id="@+id/tv_vlr_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:padding="5dp"
             android:text="      "
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_moeda_converter"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_2_blc1"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/tv_moeda_at" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_sigla_1" />
 
         <TextView
-            android:id="@+id/tv_moeda_converter"
+            android:id="@+id/tv_sigla_2_blc1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -320,8 +317,8 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_val_cvt"
-            app:layout_constraintTop_toBottomOf="@+id/tv_moeda_at" />
+            app:layout_constraintStart_toEndOf="@+id/tv_vlr_1"
+            app:layout_constraintTop_toBottomOf="@+id/tv_sigla_1" />
 
         <TextView
             android:id="@+id/textView10"
@@ -332,13 +329,13 @@
             android:text="1"
             android:textAlignment="viewEnd"
             android:textSize="18sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_moeda_atual"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_1_blc1"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/tv_moeda_at" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_sigla_1" />
 
         <TextView
-            android:id="@+id/tv_valor_2"
+            android:id="@+id/tv_vlr_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="54dp"
@@ -346,7 +343,7 @@
             android:text="      "
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_moedaDesejo"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_2_blc2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView7" />
 
@@ -372,12 +369,12 @@
             android:text="1"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_meodaAtual"
+            app:layout_constraintEnd_toStartOf="@+id/tv_sigla_1_blc2"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/imageView3" />
 
         <TextView
-            android:id="@+id/tv_meodaAtual"
+            android:id="@+id/tv_sigla_1_blc2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="54dp"
@@ -398,12 +395,12 @@
             android:text="="
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_valor_2"
+            app:layout_constraintEnd_toStartOf="@+id/tv_vlr_2"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_meodaAtual" />
+            app:layout_constraintStart_toEndOf="@+id/tv_sigla_1_blc2" />
 
         <TextView
-            android:id="@+id/tv_moedaDesejo"
+            android:id="@+id/tv_sigla_2_blc2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="54dp"
@@ -413,7 +410,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/tv_valor_2" />
+            app:layout_constraintStart_toEndOf="@+id/tv_vlr_2" />
 
         <TextView
             android:id="@+id/tv_date"
@@ -422,7 +419,7 @@
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_meodaAtual" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_sigla_1_blc2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

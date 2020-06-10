@@ -3,6 +3,8 @@ package com.mayumi.conversormoedas.ui
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.mayumi.conversormoedas.R
@@ -69,12 +71,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     }
 
     private fun initActions() {
+
         btn.setOnClickListener {
             var moedaAtual = spinner_1.selectedItem as String
             var moedaConversao = spinner_2.selectedItem as String
 
-            queryMoeda(moedaAtual, moedaConversao)
             queryConversao(moedaConversao, moedaAtual)
+            queryMoeda(moedaAtual, moedaConversao)
+
         }
     }
 
@@ -106,8 +110,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
                 var valorConversao = moedas.rates.get(moedaAtual)?.toFloat()
                 var date = moedas.date
 
-                tv_valor_2.text = format("%.4f", valorConversao!!)
-                tv_date.text = "Data: "+ date
+                tv_vlr_2.text = format("%.4f", valorConversao!!)
+                tv_sigla_2_blc2.text = moedaAtual
+                tv_sigla_1_blc2.text = moedaConversao
+                tv_date.text = "Data: " + date
             } else {
                 Toast.makeText(context, "Ocorreu um erro!", Toast.LENGTH_LONG).show()
             }
@@ -119,17 +125,17 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         var valor = et_valor.text.toString()
         var resultado = valorConversao!! * valor.toFloat()
 
-        tv_moeda_atual.text = moedaAtual
-        tv_moedaDesejo.text = moedaAtual
-        tv_moeda_at.text = moedaAtual
-        tv_meodaAtual.text = moedaConversao
-        tv_moeda_converter.text = moedaConversao
-        tv_sigla_cvt.text = moedaConversao
-
         tv_valor_input.text = valor.toString()
+        tv_sigla_1.text = moedaAtual
 
-        tv_val_cvt.text = format("%.4f", valorConversao)
+        tv_valor_resultado.text = format("%.2f", resultado)
+        tv_sigla_2.text = moedaConversao
 
-        tv_teste.text = format("%.2f", resultado)
+
+        tv_sigla_1_blc1.text = moedaAtual
+        tv_vlr_1.text = format("%.4f", valorConversao)
+        tv_sigla_2_blc1.text = moedaConversao
+
+
     }
 }
