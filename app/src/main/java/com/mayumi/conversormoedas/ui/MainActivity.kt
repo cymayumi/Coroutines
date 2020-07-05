@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.mayumi.conversormoedas.R
 import com.mayumi.conversormoedas.service.ServiceBuilder
 import com.mayumi.conversormoedas.service.WebAPI
@@ -15,11 +18,10 @@ import kotlinx.coroutines.*
 import okhttp3.internal.format
 import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
+class MainActivity : AppCompatActivity() {
 
+    private lateinit var viewModel: MainActivityViewModel
     private lateinit var context: Context
-    override val coroutineContext: CoroutineContext =
-        Dispatchers.Main + SupervisorJob()
 
     private var lista_moedas = arrayListOf<String>(
         "CAD", "HKD", "ISK", "PHP", "DKK", "HUF", "CZK",
@@ -37,13 +39,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
     }
 
-    override fun onDestroy() {
-        coroutineContext[Job]!!.cancel()
-        super.onDestroy()
-    }
-
     private fun initVars() {
         context = this@MainActivity
+        viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         setFirstSpinner()
         setSecondSpinner()
     }
@@ -76,66 +74,44 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             var moedaAtual = spinner_1.selectedItem as String
             var moedaConversao = spinner_2.selectedItem as String
 
-            queryConversao(moedaConversao, moedaAtual)
-            queryMoeda(moedaAtual, moedaConversao)
+            var valorInput = et_valor.text.toString()
 
+            if (valorInput.isEmpty()) {
+                valorInput = "0"
+            }
+
+            tv_valor_input.text = valorInput.toString()
+            viewModel.queryMoeda(moedaAtual, moedaConversao, valorInput)
+
+
+            tv_sigla_1_blc1.text = moedaAtual
+            tv_sigla_2_blc1.text = moedaConversao
+
+            tv_sigla_1_blc2.text = moedaConversao
+            tv_sigla_2_blc2.text = moedaAtual
+
+            tv_sigla_1.text = moedaAtual
+            tv_sigla_2.text = moedaConversao
         }
-    }
 
-    private fun queryMoeda(moedaAtual: String, moedaConversao: String) {
-        launch {
-            val response = withContext(Dispatchers.IO) {
-                val destinationService = ServiceBuilder.buildService(WebAPI::class.java)
-                return@withContext destinationService.getMoedas(moedaAtual)
-            }
-            if (response.isSuccessful) {
-                var moedas = response.body()!!
-                var valorConversao = moedas.rates.get(moedaConversao)?.toFloat()
+        viewModel.date.observe(this, Observer { data ->
+            tv_date.text = data
+        })
 
-                calcular(valorConversao, moedaAtual, moedaConversao)
-            } else {
-                Toast.makeText(context, "Ocorreu um erro!", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
+        viewModel.valorAtual.observe(this, Observer { valorAtu ->
+            tv_vlr_2.text = format("%.4f", valorAtu)
+        })
 
-    private fun queryConversao(moedaConversao: String, moedaAtual: String) {
-        launch {
-            val response = withContext(Dispatchers.IO) {
-                val destinationService = ServiceBuilder.buildService(WebAPI::class.java)
-                return@withContext destinationService.getMoedas(moedaConversao)
-            }
-            if (response.isSuccessful) {
-                var moedas = response.body()!!
-                var valorConversao = moedas.rates.get(moedaAtual)?.toFloat()
-                var date = moedas.date
+        viewModel.valorConversao.observe(this, Observer { valorConver ->
+            tv_vlr_1.text = format("%.4f", valorConver)
+        })
 
-                tv_vlr_2.text = format("%.4f", valorConversao!!)
-                tv_sigla_2_blc2.text = moedaAtual
-                tv_sigla_1_blc2.text = moedaConversao
-                tv_date.text = "Data: " + date
-            } else {
-                Toast.makeText(context, "Ocorreu um erro!", Toast.LENGTH_LONG).show()
-            }
-        }
-    }
+        viewModel.resultado.observe(this, Observer { result ->
+            tv_valor_resultado.text = format("%.2f", result)
+        })
 
-
-    private fun calcular(valorConversao: Float?, moedaAtual: String, moedaConversao: String) {
-        var valor = et_valor.text.toString()
-        var resultado = valorConversao!! * valor.toFloat()
-
-        tv_valor_input.text = valor.toString()
-        tv_sigla_1.text = moedaAtual
-
-        tv_valor_resultado.text = format("%.2f", resultado)
-        tv_sigla_2.text = moedaConversao
-
-
-        tv_sigla_1_blc1.text = moedaAtual
-        tv_vlr_1.text = format("%.4f", valorConversao)
-        tv_sigla_2_blc1.text = moedaConversao
-
-
+        viewModel.responseError.observe(this, Observer { erro ->
+            Toast.makeText(context, erro, Toast.LENGTH_LONG).show()
+        })
     }
 }
