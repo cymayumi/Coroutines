@@ -8,9 +8,6 @@ import retrofit2.http.Query
 interface WebAPI {
     @GET("latest")
     suspend fun getMoedas(@Query("base") moedaAtual: String): Response<Moedas>
-
-    @GET("latest")
-    suspend fun getValorConversao(@Query("base") moedaDesejo: String): Response<Moedas>
 }
 
 
