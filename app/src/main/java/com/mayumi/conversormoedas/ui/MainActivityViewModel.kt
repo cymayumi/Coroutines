@@ -11,7 +11,7 @@ import kotlinx.coroutines.*
 class MainActivityViewModel : ViewModel() {
 
     private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val uiScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     val responseError = MutableLiveData<String>()
     val valorConversao = MutableLiveData<Float>()
@@ -25,10 +25,9 @@ class MainActivityViewModel : ViewModel() {
 
     fun queryMoeda(moedaAtual: String, moedaConversao: String, num: String) {
         uiScope.launch {
-            val response = withContext(Dispatchers.IO) {
                 val destinationService = ServiceBuilder.buildService(WebAPI::class.java)
-                return@withContext destinationService.getMoedas(moedaAtual)
-            }
+                val response = destinationService.getMoedas(moedaAtual)
+
             if (response.isSuccessful) {
                 var moedas = response.body()!!
                 valorConversao.value = moedas.rates.get(moedaConversao)?.toFloat()
